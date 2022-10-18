@@ -6,8 +6,7 @@ from spacy import displacy
 
 from articles import *
 
-os.system('python -m spacy download en_core_web_trf')
-os.system('python -m spacy download en_core_web_sm')
+os.system('python -m spacy download en_core_web_trf en_core_web_sm')
 
 def ner(text, model='en_core_web_trf'):
     ner_model = spacy.load(model)
