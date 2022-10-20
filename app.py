@@ -6,9 +6,9 @@ from spacy import displacy
 
 from articles import *
 
-os.system('python -m spacy download en_core_web_trf en_core_web_sm')
-
-def ner(text, model='en_core_web_trf'):
+os.system('python -m spacy download en_core_web_trf')
+os.system('python -m spacy download en_core_web_sm')
+def ner(text, model='en_core_web_sm'):
     ner_model = spacy.load(model)
     doc = ner_model(text)
     dep_tree = displacy.render(doc, style="dep", page=True)
@@ -41,7 +41,7 @@ with demo:
                 # Textbox to show the article
                 text1 = gr.Textbox(label='Example')
                 rad2 = gr.components.Radio(
-                    ['Spacy English Transformer', 'Spacy English Small'], label='Select Model for Token Classification')  # Radio button to select the model
+                    ['Spacy English Small','Spacy English Transformer'], label='Select Model for Token Classification')  # Radio button to select the model
             submit1 = gr.Button('Submit')
         with gr.TabItem("Do it yourself!"):  # If the user wants to enter their own text
             with gr.Column():
@@ -65,7 +65,7 @@ with demo:
             elif model_name == 'Spacy English Small':
                 return 'en_core_web_sm'
             elif model_name is None:
-                return 'en_core_web_trf'
+                return 'en_core_web_sm'
 
         # Change the article when the user selects the article
         rad.change(action1, rad, text1)
